@@ -24,20 +24,15 @@ Future<SearchResult?> fetchSearchResult() async {
               print(
                   'Image HTTP request failed, statusCode: ${imageResponse.statusCode}, $imageUrl');
 
-              // Set a default image URL for this result
-              result.imageUrl =
-                  'assets/images/banner1.png'; // Replace with your default image URL
+              result.imageUrl = 'assets/images/banner1.png';
             }
           } else {
             print('Invalid image URL: $imageUrl');
-            // Set a default image URL for this result
-            result.imageUrl =
-                'assets/images/banner1.png'; // Replace with your default image URL
+            result.imageUrl = 'assets/images/banner1.png';
           }
         }
       }
 
-      // Return the modified searchResult
       return searchResult;
     } else {
       return null;
