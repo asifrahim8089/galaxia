@@ -31,30 +31,29 @@ Widget buildSearchResultCard(context, responseData, bool favorite) {
                 Row(
                   children: [
                     Container(
-                      height: 130,
-                      width: 80,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/images/banner1.png',
-                        image: responseData.imageUrl,
-                        fit: BoxFit.cover,
                         height: 130,
                         width: 80,
-                        imageErrorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            'assets/images/banner1.png',
-                            fit: BoxFit.cover,
-                            height: 130,
-                            width: 80,
-                          );
-                        },
-                      ),
-                    ),
+                        clipBehavior: Clip.antiAlias,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: FadeInImage.assetNetwork(
+                          placeholder: 'assets/images/banner1.png',
+                          image: responseData.imageUrl ?? '',
+                          fit: BoxFit.cover,
+                          height: 130,
+                          width: 80,
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/banner1.png',
+                              fit: BoxFit.cover,
+                              height: 130,
+                              width: 80,
+                            );
+                          },
+                        )),
                     const SizedBox(
                       width: 10,
                     ),

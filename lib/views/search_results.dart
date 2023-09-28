@@ -44,74 +44,78 @@ class _SearchResultsState extends State<SearchResults> {
         child: CustomScrollView(
           controller: customScrollViewController,
           slivers: <Widget>[
-            SliverAppBar(
-              stretch: true,
-              backgroundColor: HexColor("#2E3399"),
-              leadingWidth: 0,
-              automaticallyImplyLeading: false,
-              expandedHeight: 120.0, // Adjust this as needed
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                expandedTitleScale: 1.2,
-                title: _showSearchBar
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 50,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(16.0),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide.none,
-                              ),
-                              prefixIcon: IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back_ios,
-                                  size: 20,
-                                  color: Colors.black,
+            _showSearchBar
+                ? SliverAppBar(
+                    backgroundColor: HexColor("#2E3399"),
+                    automaticallyImplyLeading: false,
+                    expandedHeight: 100.0, // Adjust this as needed
+                    floating: true,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                        titlePadding: const EdgeInsets.all(0),
+                        expandedTitleScale: 1.1,
+                        title: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(16.0),
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide.none,
                                 ),
-                              ),
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: IconButton(
+                                prefixIcon: IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                   icon: const Icon(
-                                    Icons.sort,
-                                    size: 15,
+                                    Icons.arrow_back_ios,
+                                    size: 20,
                                     color: Colors.black,
                                   ),
-                                  onPressed: () {
-                                    // Your search action here
-                                  },
                                 ),
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  child: IconButton(
+                                    icon: const Icon(
+                                      Icons.sort,
+                                      size: 15,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      // Your search action here
+                                    },
+                                  ),
+                                ),
+                                hintText: "Planets",
+                                hintStyle: const TextStyle(fontSize: 12),
                               ),
-                              hintText: "Planets",
-                              hintStyle: const TextStyle(fontSize: 12),
                             ),
                           ),
-                        ),
-                      )
-                    : AppBar(
-                        backgroundColor: HexColor("#2E3399"),
-                        elevation: 0,
-                        automaticallyImplyLeading: true,
-                        title: const Text(
-                          'London', // Replace with your desired title
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        )),
+                  )
+                : SliverAppBar(
+                    backgroundColor: HexColor("#2E3399"),
+                    automaticallyImplyLeading: true,
+                    expandedHeight: 0, // Adjust this as needed
+                    floating: true,
+                    pinned: true,
+                    flexibleSpace: const FlexibleSpaceBar(
+                      expandedTitleScale: 1.1,
+                      title: Text(
+                        'London', // Replace with your desired title
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
-              ),
-            ),
+                    ),
+                  ),
             SliverPersistentHeader(
               pinned: true,
               delegate: _SliverTabBarDelegate(
@@ -139,7 +143,7 @@ class _SearchResultsState extends State<SearchResults> {
                           padding: const EdgeInsets.all(0),
                           itemCount: responsedata.result.length,
                           itemBuilder: (context, index) {
-                            final item = responsedata.result[index];
+                            final item = responsedata!.result![index];
                             return buildSearchResultCard(context, item, false);
                           },
                         ),
